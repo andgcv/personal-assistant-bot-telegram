@@ -1,0 +1,35 @@
+name: Deploy Script Python
+
+on:
+  workflow_dispatch:   # Permite a execução manual do fluxo de trabalho
+    inputs:
+      example_input:    # Input opcional
+        description: 'Example input'
+        required: false
+        default: 'default_value'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   # Usamos um runner do GitHub (Ubuntu)
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2   # Faz o checkout do repositório para o runner
+
+      - name: Configure Python
+        uses: actions/setup-python@v2   # Configura o Python no runner
+        with:
+          python-version: '3.9'   # Define a versão do Python que queres usar
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip   # Atualiza o pip
+          pip install -r requirements.txt     # Instala as dependências definidas no requirements.txt
+
+      - name: Execute script Python
+        run: |
+          python seu_script.py   # Executa o script Python que tens no repositório
+
+      - name: Verify execution
+        run: echo "Deploy do script Python concluído com sucesso!"
+
