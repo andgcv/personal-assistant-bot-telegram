@@ -1,0 +1,38 @@
+name: Run Daily Tasks
+
+on:
+  schedule:
+    # Executa às 08:30 e 21:30 (horário de Lisboa)
+    - cron: '30 8 * * *'
+    - cron: '30 21 * * *'
+
+jobs:
+  daily-tasks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checar código
+        uses: actions/checkout@v2
+      - name: Configurar ambiente Python
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+      - name: Executar script
+        run: |
+          source .env
+          python main.py --manha
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          
+      - name: Executar script para revisão noturna
+        run: |
+          source .env
+          python main.py --noite
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
