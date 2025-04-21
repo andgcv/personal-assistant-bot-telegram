@@ -3,7 +3,7 @@ name: Run Daily Tasks
 on:
   schedule:
     # Executa às 08:30 e 21:30 (horário de Lisboa)
-    - cron: '54 11 * * *'
+    - cron: '30 07 * * *'
     - cron: '30 20 * * *'
 
 jobs:
