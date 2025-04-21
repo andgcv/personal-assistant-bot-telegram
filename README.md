@@ -1,0 +1,1 @@
+[![Run Daily Tasks](https://github.com/andgcv/personal-assistant-bot-telegram/actions/workflows/daily_task.yml/badge.svg?branch=main&event=workflow_run)](https://github.com/andgcv/personal-assistant-bot-telegram/actions/workflows/daily_task.yml)
